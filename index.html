@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap"
+      rel="stylesheet"
+    />
     <title>dB Counter</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- <div class="main-inputs">
         <div class="inputs">
             <div class="input">
@@ -26,24 +29,24 @@
         </div>
     </div> -->
     <main>
-        <div class="border">
-            <img src="img/board.png" alt="" class="board" draggable="false">
-            <div class="barre">
-                <div class="carre"></div>
-            </div>
+      <div class="border">
+        <img src="img/board.png" alt="" class="board" draggable="false" />
+        <div class="barre">
+          <div class="carre"></div>
         </div>
-        <button>Stop</button>
-        <h1><span id="db">-</span></h1>
-        <h2>dB</h2>
-        <div id="passwordOverlay" style="display: none;">
-            <div>
-                <form id="passwordForm" class="password">
-                    <label for="passwordInput">Enter password to stop:</label><br>
-                    <input type="password" id="passwordInput" required><br>
-                </form>
-            </div>
+      </div>
+      <button>Stop</button>
+      <h1><span id="db">-</span></h1>
+      <h2>dB</h2>
+      <div id="passwordOverlay" style="display: none">
+        <div>
+          <form id="passwordForm" class="password">
+            <label for="passwordInput">Enter password to stop:</label><br />
+            <input type="password" id="passwordInput" required /><br />
+          </form>
         </div>
+      </div>
     </main>
     <script src="script.js" type="text/javascript"></script>
-</body>
+  </body>
 </html>

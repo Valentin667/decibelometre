@@ -5,14 +5,38 @@ document.addEventListener("DOMContentLoaded", function () {
   let stream;
   let offset = 0;
   let date;
-  let audio = new Audio("sound/sound.mp3");
   let isRunning = true; // variable to track whether the system is running or stopped
+  let isPlaying = false;
+  let activeAudios = []; // array to keep track of active audio objects
+
+  // Tableau de fichiers audio
+  const audioFiles = [
+    "sound/sound01.mp3",
+    "sound/sound02.mp3",
+    "sound/sound03.mp3",
+    "sound/sound04.mp3",
+    "sound/sound05.mp3",
+    "sound/sound06.mp3",
+    "sound/sound07.mp3",
+  ];
+
+  // Fonction pour sélectionner un fichier audio au hasard
+  const getRandomAudio = () => {
+    const randomIndex = Math.floor(Math.random() * audioFiles.length);
+    return new Audio(audioFiles[randomIndex]);
+  };
 
   // Function to stop the dB meter
   function stopDbMeter() {
     isRunning = false;
     clearInterval(interval); // Stop the interval
-    audio.pause(); // Pause the audio
+
+    // Stop all active audio objects
+    activeAudios.forEach((audio) => {
+      audio.pause();
+      audio.currentTime = 0; // Reset audio to start
+    });
+    activeAudios = [];
   }
 
   // Function to start the dB meter
@@ -60,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
       processor.connect(context.destination);
 
       processor.onaudioprocess = () => {
+        if (!isRunning) return; // Stop processing if not running
+
         let data = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(data);
         let rms = 0;
@@ -73,9 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
         let value = rms + offset;
         localDbValues.push(value);
 
-        // Vérifiez si le niveau de décibels est égal à 100 et déclenchez le son
-        if (value >= 100) {
+        // PAGNA - Plus élevé = moins sensible, Moins élevé = plus sensible
+        if (value >= 90 && !isPlaying) {
+          const audio = getRandomAudio();
           audio.play();
+          isPlaying = true;
+          activeAudios.push(audio); // Add the audio object to the activeAudios array
+
+          // Définir un délai avant de pouvoir rejouer un son
+          setTimeout(() => {
+            isPlaying = false;
+          }, 3000); // Délai de 3 secondes entre chaque son
         }
       };
     });
